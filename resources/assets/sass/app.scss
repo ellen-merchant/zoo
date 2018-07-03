@@ -1,0 +1,20 @@
+
+// Fonts
+@import url("https://fonts.googleapis.com/css?family=Lato");
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+.outer-container
+{
+  background-color: #ffffff;
+}
+
+th
+{
+  background-color: $blue;
+  color: #ffffff;
+}
