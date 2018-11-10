@@ -1,4 +1,4 @@
-# Animals
+# Zoo Coding Test
 ## Specification
 Write a simple Zoo simulator which contains 3 different types of animal: monkey,
 giraffe and elephant. The zoo should open with 5 of each type of animal.
