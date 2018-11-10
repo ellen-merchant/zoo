@@ -1,0 +1,34 @@
+env:
+  global:
+  - secure: S97KKdDta9rqRa2iJtZPd0FDq53SYs61IpqHpvw1RYKNRQELeeHcVva6p0bpeHtMgbV7ThE1OeyCon5Ttwqugo7ADnv0wEsnSq5s3GE5hFfpF5LeDCgj4FdPnzMpyv7+KfKGJ5gHPZtgLoVPVVav0um2JzurzX3ZLQnoOzJQOgaZgaURASk9iS1a92WvSK+zWv/YNt028J1xzMCOgb80ltr7LZN4zg96jY+0Hnc5az+7hemo/7Gxd0pqYdwcy9S/fy+QlsgT1h7poWDPzQh5kJ4ikMP7VZNJgY4pX0LEi92Pde337sYhxOpdtWLc3+nRydmsT6M0tHtcIQzThyHy1IzIKA+nTh0UqSJk3jQcjWVXCtV9wOkKVFuIDcA+1Ev5N/MwapCFsFeiojHboskzt+oyQ5BKgz+8b8IGyA4Rk4SeDhEAokNSMr2rHFw9iCZfNcKpzDs6dzAGWWfJxB3RKy7J/RdG/4mIV586eorvwnBKzAJZABZKPSGkGXgNpGt4bTRRduBEF3L/ZQKXEUHukSA1lGOQFW0L5sPc929Uz5IcqlkpVxlppVgxAPO/5oWry+keubv1aN30MLOtGkhoRLmYd4DtC0nHsH0aQRzJdOey8UxN3PWaSQgS8i3AzIq/fimjsu1JAPMEGPmA9wYcR8xQAIPRb+SoLSkEpwbAR+A=
+  - secure: bCUiAXNog+HmzcTw2vQzohAyzMqYaDKNebyfgLuv5cRBaQH5MVy3FVSBanTY+uU5HhyNWGmqUJgo5HYyYc23u9ZDXZW/MYhoVNdNFCL+E9115U30S3l0jCNH+GjmALiqzdB5jFOcFMZ9HVYCL4KkyExOAnEpxX1QkcHOApBfoMGYrANS8bsyii13r3rQh6wszyVyvtMheUEHljsCdqIzal1XznNVFCCwrH2IlGu3pwsr3oS0N6OkjpNOVDGCXn00rd8rtX5zLDWYERer41G06+6sosCZbK+960DpF4cFwiqS2jvtqSwzRmd9r7KHlR6bJMZF/LC39zKZn7TVOk6MdctO18D+l78Ux0WygXZ5+Nhg8e3Bt90Y3Dzip0k3G8LkkE9N6930lLCgyAWFuncKfQy8qsIKPmRMMW7fkVGGbHi+t/ZdSBZeAjwWgHSGsEqeDslYz/ax2tdhX7t1E34odjUJfsvMC5K3T6blyaeKiGhx+fDozgTqDxBPJkhVq3LGCZVmRZ6XKyj1D5kTGGKnDE1iWxLCDAC3IXGiDDK0fE9tF5Z8axs8ZLXIJFk8rP6MmcLslEAEGvDDoyXj+556xtZ2Qe3fu9F/MlybR1w3W6bX2Byl9OELPxzVgpODD84oTGogL9P8tB+h1lTKo6O8n921TaO72y6wnfSyba1Nuqg=
+  - secure: Bwi8obiI8lptFADI1yB/kQyMD3dRD1D5pYMpfuq3Q4cZZVUDT0RnTI1PyOnP3/s/dW0RDMLdVwdKiSTrnW2u4+gnefEor9xWUeBEUhTjhNmC+I6Sczwxs1p/L9pikzFWmiRmYIIX8OjB0Cvh9e7ugqralCT8UyJLZqXEcm66vNLagwI44XwqCVXUFVsEa0nKtpFfPTUNgKKXBKhk4jJyrvM4/sskNPIb6a0iGKgepIfLAywQDme0QHRMJabBq7sy5/ppfeXY0QJjnw5L27SNKnYiWTl6cXMvYL8cS5SQZVq2saN7dRwZ3EeFdsU5cbd/5QyWG7+pleVCKfyDVHA606pKMxwi55m+hWaNvF1SlNbKTyNMb2d5dNFObrad3yHrpF5/uPMLe4Mquy6FaS+n0F7AwOBniqYo25LM1vURrMRQa+2CIzCNq/O1pVzOA3h6K/RGKuhpiee9ZA2S++IZ7Tt+uf6bV37J83JyI1Nq1MCqlHcWRGHW/m/kqKNBpIDVWPhMnE5BVPorLCxznNAOT5dE3cqK+7eLHC04SJl2UH7FaIX4H6XK2k2L8Ck2Xdb01dnORctFJOx5jEYUtNEu3mEbgTBTXRQQCe8QIRLjti5CS/SmKnQbp9GuaJj59qeVUsMrqLs/fRieVRJvH6LWXi3A5He02dBYR0rv/dJOGYk=
+language: php
+sudo: required
+dist: trusty
+addons:
+  apt:
+    packages:
+    - libssh-dev
+php:
+- 7.2
+before_install:
+- composer self-update
+- npm i npm@latest -g
+before_script:
+- cp .env.travis .env
+- composer install --no-interaction
+- php artisan key:generate
+- php artisan storage:link
+- chmod 777 -R storage
+- php artisan migrate
+- npm install
+- npm run production
+script:
+- phpdbg -qrr vendor/bin/phpunit --coverage-clover=coverage.xml
+services:
+- mysql
+cache:
+  directories:
+  - node_modules
+  - vendor
