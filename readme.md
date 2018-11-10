@@ -1,4 +1,6 @@
 # Zoo Coding Test
+[![Build Status](https://travis-ci.com/ellllllen/zoo.svg?branch=master)](https://travis-ci.com/ellllllen/zoo)
+
 ## Specification
 Write a simple Zoo simulator which contains 3 different types of animal: monkey,
 giraffe and elephant. The zoo should open with 5 of each type of animal.
