@@ -1,5 +1,6 @@
 # Zoo Coding Test
 [![Build Status](https://travis-ci.com/ellllllen/zoo.svg?branch=master)](https://travis-ci.com/ellllllen/zoo)
+[![codecov](https://codecov.io/gh/ellllllen/zoo/branch/master/graph/badge.svg)](https://codecov.io/gh/ellllllen/zoo)
 
 ## Specification
 Write a simple Zoo simulator which contains 3 different types of animal: monkey,
