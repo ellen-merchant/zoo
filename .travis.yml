@@ -11,7 +11,7 @@ addons:
     packages:
     - libssh-dev
 php:
-- 7.2
+- 8.0
 before_install:
 - composer self-update
 - npm i npm@latest -g
