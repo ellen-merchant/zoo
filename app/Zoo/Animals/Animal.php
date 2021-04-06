@@ -5,9 +5,12 @@ namespace App\Zoo\Animals;
 use App\Zoo\Breeds\Breed;
 use App\Zoo\Breeds\Contracts\UniqueBreedDeceasedHealth;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Animal extends Model
 {
+    use HasFactory;
+
     const HEALTH_UPPER_LIMIT = 100;
     const HEALTH_LOWER_LIMIT = 0;
 
