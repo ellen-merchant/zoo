@@ -22,7 +22,7 @@ before_script:
 - chmod 777 -R storage
 - php artisan migrate
 - npm install
-- npm run production
+- npm run prod
 script:
 - phpdbg -qrr vendor/bin/phpunit --coverage-clover=coverage.xml
 services:
